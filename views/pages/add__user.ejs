@@ -1,0 +1,132 @@
+<%- include ("../partials/head.ejs", {title:"Add User"})%> <%-
+include("../partials/header.ejs")%>
+
+<div style="background-color: aliceblue">
+  <div class="container">
+    <div
+      class="row"
+      style="display: flex; justify-content: center; height: 100%"
+    >
+      <div class="col-6 m-auto align-self-center">
+        <div class="content" style="border-radius: 1.5em; padding: 1.5em">
+          <div class="modal-header d-flex justify-content-center">
+            <h1>Add User</h1>
+          </div>
+          <form method="POST" action="/user/add">
+            <div class="mb-3">
+              <label for="exampleInputFirstName" class="form-label"
+                >First Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="firstname"
+                id="firstname"
+                aria-describedby="firstnameHelp"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputLastName" class="form-label"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="lastname"
+                id="lastname"
+                aria-describedby="lastnameHelp"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputUsername" class="form-label"
+                >Username</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                id="username"
+                aria-describedby="usernameHelp"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputUsername" class="form-label"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                id="password"
+                aria-describedby="usernameHelp"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputDate" class="form-label"
+                >Date Birth</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                name="birthdate"
+                id="birthdate"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputPosition" class="form-label"
+                >Position</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="position"
+                id="position"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="row"
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: auto;
+      "
+    >
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Birthdate</th>
+            <th scope="col">Position</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include ("../partials/foot.ejs")%>
