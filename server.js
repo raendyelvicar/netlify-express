@@ -9,6 +9,7 @@ const localStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
 var User = require("./models/user");
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 const db = require("./models");
 db.mongoose
@@ -126,13 +127,6 @@ app.get("/", isLoggedIn, (request, response) => {
   response.render("index.ejs"), { title: "Home" };
 });
 
-// router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
-// router.post("/", (req, res) => res.json({ postBody: req.body }));
-
-app.use(bodyParser.json());
-app.use("/.netlify/functions/server", router); // path must route to lambda
-
-app.listen(process.env.PORT || 5000);
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 module.exports = app;
-module.exports.handler = serverless(app);
