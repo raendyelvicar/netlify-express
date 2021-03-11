@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack"
+    "build": "ng build",
+    "heroku-postbuild": "ng build --prod"
   },
   "engines": {
     "node": "14.15.5",
