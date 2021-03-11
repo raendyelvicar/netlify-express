@@ -7,10 +7,10 @@ const session = require("express-session");
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
-var User = require("../models/user");
+var User = require("./models/user");
 const app = express();
 
-const db = require("../models");
+const db = require("./models");
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -25,8 +25,8 @@ db.mongoose
   });
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../views"));
-app.use(express.static(path.join(__dirname, "../public")));
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
     secret: "rumpinosecret",
@@ -42,12 +42,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function (user, done) {
-  console.log("SERIALIZE");
   done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-  console.log("DESERIALIZE");
   User.findById(id, function (error, user) {
     done(error, user);
   });
@@ -73,9 +71,9 @@ passport.use(
   })
 );
 
-const userRoute = require("../routes/userRoute");
-const fileRoute = require("../routes/fileRoute");
-const companyRoute = require("../routes/companyRoute");
+const userRoute = require("./routes/userRoute");
+const fileRoute = require("./routes/fileRoute");
+const companyRoute = require("./routes/companyRoute");
 
 const router = express.Router();
 
@@ -112,11 +110,11 @@ app.post(
 );
 
 app.get("/register", (request, response) => {
-  response.render("./pages/registration");
+  response.render("pages/registration.ejs");
 });
 
 app.get("/login", isLoggedOut, (request, response) => {
-  response.render("./pages/login");
+  response.render("pages/login");
 });
 
 app.get("/logout", function (request, response) {
