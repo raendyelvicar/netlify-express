@@ -13,30 +13,29 @@ include("../partials/header.ejs")%>
             <h1>Add User</h1>
           </div>
           <form method="POST" action="/user/add">
-            <div class="mb-3">
-              <label for="exampleInputFirstName" class="form-label"
-                >First Name</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="firstname"
-                id="firstname"
-                aria-describedby="firstnameHelp"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="exampleInputLastName" class="form-label"
-                >Last Name</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="lastname"
-                id="lastname"
-                aria-describedby="lastnameHelp"
-              />
+            <div class="row mb-3">
+              <div class="col">
+                <label for="exampleInputFirstName" class="form-label"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="firstname"
+                  aria-label="First name"
+                />
+              </div>
+              <div class="col">
+                <label for="exampleInputLastname" class="form-label"
+                  >LastName</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="lastname"
+                  aria-label="Last name"
+                />
+              </div>
             </div>
 
             <div class="mb-3">
@@ -89,7 +88,7 @@ include("../partials/header.ejs")%>
               />
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-dark">Submit</button>
           </form>
         </div>
       </div>
@@ -116,13 +115,15 @@ include("../partials/header.ejs")%>
           </tr>
         </thead>
         <tbody>
+          <% users.forEach(function(user, count) { %>
           <tr>
-            <th scope="row">1</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th scope="row"><%= ++count %></th>
+            <td><%= user.firstname %></td>
+            <td><%= user.lastname %></td>
+            <td><%= moment(user.birthdate).format("DD MMMM YYYY") %></td>
+            <td><%= user.password%></td>
           </tr>
+          <% }); %>
         </tbody>
       </table>
     </div>

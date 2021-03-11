@@ -1,7 +1,9 @@
 const db = require("../models/index");
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
+const moment = require("moment");
 
-exports.create = (request, response) => {
+exports.create = async (request, response) => {
   const {
     firstname,
     lastname,
@@ -24,31 +26,38 @@ exports.create = (request, response) => {
     return;
   }
 
-  const existedUser = User.findOne(username);
+  const existedUser = await User.findOne({ username: username });
 
   if (existedUser) {
     response.status(400).send({ message: "Username has already exist." });
   } else {
-    const user = new User({
-      firstname: firstname,
-      lastname: lastname,
-      username: username,
-      password: password,
-      birthdate: birthdate,
-      position: position,
-    });
+    bcrypt.genSalt(10, function (error, salt) {
+      if (error) return next(error);
+      bcrypt.hash(password, salt, function (error, hash) {
+        if (error) return next(error);
 
-    user
-      .save()
-      .then((data) => {
-        response.send(data);
-      })
-      .catch((error) => {
-        response.status(500).send({
-          message:
-            error.message || "Some error occurred while creating the User",
+        const user = new User({
+          firstname: firstname,
+          lastname: lastname,
+          username: username,
+          password: hash,
+          birthdate: birthdate,
+          position: position,
         });
+
+        user
+          .save()
+          .then((data) => {
+            response.redirect("/user");
+          })
+          .catch((error) => {
+            response.status(500).send({
+              message:
+                error.message || "Some error occurred while creating the User",
+            });
+          });
       });
+    });
   }
 };
 
@@ -61,7 +70,7 @@ exports.findAll = (request, response) => {
 
   User.find(condition)
     .then((data) => {
-      response.send(data);
+      return response.status(200).send(data);
     })
     .catch((error) => {
       response.status(500).send({

@@ -2,12 +2,12 @@ POST http://localhost:3000/user/add HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstname":"Raendy",
-    "lastname":"Andhika",
-    "username":"raendyandhika",
-    "password":"andhika123.",
+    "firstname":"Karina",
+    "lastname":"Aespa",
+    "username":"karina",
+    "password":"aespa",
     "birthdate":"1998-06-24T00:00:00Z",
-    "position":"Front End Developer"
+    "position":"Artist"
 }
 
 ###
@@ -22,14 +22,14 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/user/delete/6046f7448a3a650bf8c16c36 HTTP/1.1
+DELETE http://localhost:3000/user/delete/6048eda0b1b1af2aec06eac9 HTTP/1.1
 Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/user/update/6046f4cb9dc7191424113bd2 HTTP/1.1
+PUT http://localhost:3000/user/update/6048eda0b1b1af2aec06eac9 HTTP/1.1
 Content-Type: application/json
 
 {
-   "username":"proxyhorse"
+   "password":"qwerty"
 }

@@ -2,10 +2,17 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const users = require("../controllers/user.controller");
+const { locals } = require("../express/server");
+const moment = require("moment");
 
-router.get("/", (request, response) => {
-  const user = User.find();
-  response.render("pages/add__user", { users: user });
+router.get("/", async (request, response) => {
+  response.locals.moment = moment;
+
+  const user = await User.find();
+  response.render("pages/add__user", {
+    users: user,
+    moment: moment,
+  });
 });
 
 // Post new user
