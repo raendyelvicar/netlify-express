@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const users = require("../controllers/user.controller");
-const { locals } = require("../server");
+const { locals } = require("..");
 const moment = require("moment");
 
 router.get("/", async (request, response) => {
