@@ -132,5 +132,7 @@ app.get("/", isLoggedIn, (request, response) => {
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
 
+app.listen(process.env.PORT || 5000);
+
 module.exports = app;
 module.exports.handler = serverless(app);
